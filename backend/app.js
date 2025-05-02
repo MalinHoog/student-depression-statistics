@@ -5,7 +5,7 @@ import path from 'path';
 import sstatparts from './sstatparts.js';
 
 // Port to start the web server on
-const port = 3005;
+const port = 3006;
 
 // Create a web server
 const app = express();
