@@ -3,5 +3,5 @@ createMenu('Statistics Template JS', [
   { name: 'Page1', script: 'page1.js' },
   { name: 'Page2', script: 'page2.js' },
   { name: 'Page3', script: 'page3.js' },
-  { name: 'Random resultat', script: 'random-result.js' },
+  { name: 'Sources', script: 'sources.js' }
 ]);
