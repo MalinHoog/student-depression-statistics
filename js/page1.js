@@ -9,6 +9,8 @@ addMdToPage(`
   * **High**: 4 - 5
 `);
 
+
+
 addMdToPage(`<br>`);
 
 let studySatisfaction = await dbQuery(
@@ -36,6 +38,61 @@ tableFromData({ data: studySatisfaction });
 
 addMdToPage(`<br>`);
 
+let finansStress = await dbQuery(`
+  SELECT profession AS Profession,
+    CASE 
+     WHEN financial_stress = 1 THEN 'No Financial Stress'
+     WHEN financial_stress = 2 THEN 'Minor Financial Stress'
+     WHEN financial_stress = 3 THEN 'Moderate Financial Stress'
+     WHEN financial_stress = 4 THEN 'Major Financial Stress'
+     WHEN financial_stress = 5 THEN 'Extreme Financial Stress'
+    END AS Financial_Stress,
+    COUNT(*) AS Student_Count,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
+  FROM results
+  WHERE financial_stress != '?'
+  GROUP BY profession, financial_stress
+  ORDER BY profession, financial_stress
+`);
+
+tableFromData({ data: finansStress });
+
+let finansStressDepression = await dbQuery(`
+  SELECT 
+    CASE 
+     WHEN financial_stress = 1 THEN 'No Financial Stress'
+     WHEN financial_stress = 2 THEN 'Minor Financial Stress'
+     WHEN financial_stress = 3 THEN 'Moderate Financial Stress'
+     WHEN financial_stress = 4 THEN 'Major Financial Stress'
+     WHEN financial_stress = 5 THEN 'Extreme Financial Stress'
+    END AS Financial_Stress,
+    AVG(depression) AS Avg_Depression
+    FROM results
+    WHERE financial_stress != '?'
+    GROUP BY financial_stress
+    ORDER BY financial_stress 
+`);
+
+// tableFromData({ data: finansStressDepression });
+
+drawGoogleChart({
+  type: 'ColumnChart',
+  data: makeChartFriendly(finansStressDepression, 'Finance', 'Avrerage Depression'),
+  options: {
+    title: 'The correlation between financial stress and depression',
+    height: 500
+  },
+  chartArea: { left: 75, bottom: 150, width: '90%' },
+  legend: { position: top }, // not working??
+  vAxis: { title: 'Depression (0–1)' },
+  hAxis: { title: 'Finance levels' },
+  colors: ['#3366cc']
+});
+
+
+
+addMdToPage(`<br>`);
+
 let studentDepression = await dbQuery(
   "SELECT profession AS Profession, " +
   "gender AS Gender, " +
@@ -53,45 +110,31 @@ let studentDepression = await dbQuery(
 
 tableFromData({ data: studentDepression });
 
-/*
-let studentDepression2 = await dbQuery(
-  "SELECT profession AS Profession, " +
-  "gender AS Gender, " +
-  "CASE " +
-  "WHEN depression = 0 THEN 'Does Not Feel Depressed' " +
-  "WHEN depression = 1 THEN 'Does Feel Depressed' " +
-  "END AS Depression_Level, " +
-  "ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession, gender), 1) AS Percentage " +
-  "FROM results " +
-  "WHERE depression IS NOT NULL AND gender IS NOT NULL " +
-  "GROUP BY profession, gender, Depression_Level " +
-  "ORDER BY profession, gender, Depression_Level"
-);
+addMdToPage(`<br>`);
 
-studentDepression2 = studentDepression2.filter(row =>
-  typeof row.Percentage === 'number' && !isNaN(row.Percentage)
-);
+let cgpaData = await dbQuery(`
+  SELECT 
+    CASE 
+      WHEN cgpa < 6 THEN '< 6.0'
+      WHEN cgpa BETWEEN 6 AND 7.5 THEN '6.0–7.5'
+      ELSE '> 7.5'
+    END AS cgpa_range,
+  AVG(depression) AS avgDepression
+  FROM results
+  GROUP BY cgpa_range
+  ORDER BY cgpa_range;
+`);
+
+tableFromData({ data: cgpaData });
 
 drawGoogleChart({
   type: 'ColumnChart',
-  data: makeChartFriendly(studentDepression2, 'Profession', 'Percentage', 'Depression_Level'),
+  data: makeChartFriendly(cgpaData, 'CGPA-intervall', 'Genomsnittlig depression'),
   options: {
-    title: 'Depression Level by Profession and Gender',
-    animation: {
-      startup: true,
-      duration: 1000,
-      easing: 'out'
-    },
-    height: 600,
-    chartArea: { left: 75, bottom: 150, width: '85%' },
-    legend: { position: 'top' },
-    vAxis: { title: 'Percentage (%)' },
-    hAxis: {
-      title: 'Profession',
-      slantedText: true,
-      slantedTextAngle: 45
-    },
-    colors: ['#66bb6a', '#ef5350'] // grönt = mår bra, rött = deprimerad
+    title: 'Samband mellan CGPA och depression',
+    height: 400,
+    vAxis: { title: 'Depression (0–1)' },
+    hAxis: { title: 'CGPA-intervall' },
+    colors: ['#3366cc']
   }
 });
-*/
