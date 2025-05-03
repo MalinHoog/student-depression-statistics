@@ -1,5 +1,6 @@
 addMdToPage(`
-  ## Indian Students
+  ## Looking at the data
+  _______________
 
   In the data there is a column called *study_satisfaction*, which is a number between 0 and 5. The higher the number, the more satisfied the student is with their studies. But while looking over the data set, I noticed that there are some students that have set their CGPA, Study Satisfaction and Academic Pressure to 0. So when working with the data, I will not include these answers, as it seems they are not real answers. I can only assume that these students did not fill in the survey properly.
 
@@ -7,6 +8,8 @@ addMdToPage(`
   * **Low**: 1 - 2
   * **Medium**: 3
   * **High**: 4 - 5
+
+  _____________
 `);
 
 
@@ -36,6 +39,38 @@ let studySatisfaction = await dbQuery(
 
 tableFromData({ data: studySatisfaction });
 
+addMdToPage(`
+  <br>`);
+
+let studySatFac = await dbQuery(`
+  SELECT 
+  CASE 
+    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+  END AS Satisfaction_Level,
+  AVG(depression) AS Avg_Depression
+  FROM results
+  WHERE study_satisfaction != 0
+  GROUP BY Satisfaction_Level
+  ORDER BY Satisfaction_Level
+`);
+
+addMdToPage(`
+  <br>`);
+
+drawGoogleChart({
+  type: 'ColumnChart',
+  data: makeChartFriendly(studySatFac, 'Study Satisfaction', 'Average Depression'),
+  options: {
+    title: 'The correlation between Study Satisfaction and Depression',
+    height: 500,
+    vAxis: { title: 'Depression (0–1)' },
+    hAxis: { title: 'Study Satisfaction' },
+    colors: ['#3366cc']
+  }
+});
+
 addMdToPage(`<br>`);
 
 let finansStress = await dbQuery(`
@@ -56,6 +91,8 @@ let finansStress = await dbQuery(`
 `);
 
 tableFromData({ data: finansStress });
+
+addMdToPage(`<br>`);
 
 let finansStressDepression = await dbQuery(`
   SELECT 
