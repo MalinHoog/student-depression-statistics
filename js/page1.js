@@ -18,9 +18,9 @@ let studySatisfaction = await dbQuery(
   "SELECT profession AS Profession, " +
   "gender AS Gender, " +
   "CASE " +
-  "WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)' " +
-  "WHEN study_satisfaction = 3 THEN 'Medium (3)' " +
-  "WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)' " +
+  "WHEN study_satisfaction IN (1, 2) THEN 'Low Study Satisfaction (1-2)' " +
+  "WHEN study_satisfaction = 3 THEN 'Medium Study Satisfaction (3)' " +
+  "WHEN study_satisfaction IN (4, 5) THEN 'High Study Satisfaction (4-5)' " +
   "END AS Satisfaction_Level, " +
   "COUNT(*) AS Amount_Of_Students, " +
   "ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession, gender), 1) AS Percentage " +
@@ -45,39 +45,49 @@ let gender = addDropdown('Choose what gender to show', ['Male', 'Female', 'Both'
 let femalestudySatisfaction = await dbQuery(`
   SELECT profession AS Profession,
   CASE
-    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
-    WHEN study_satisfaction = 3 THEN 'Medium (3)'
-    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+    WHEN study_satisfaction IN (1, 2) THEN 'Low Study Satisfaction (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium Study Satisfaction (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High Study Satisfaction (4-5)'
   END AS Satisfaction_Level,
   COUNT(*) AS Amount_Of_Students,
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE gender = 'Female' AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
   GROUP BY profession, Satisfaction_Level
-  ORDER BY profession, Satisfaction_Level
+  ORDER BY 
+  CASE 
+      WHEN study_satisfaction IN (1, 2) THEN 1
+      WHEN study_satisfaction = 3 THEN 2
+      WHEN study_satisfaction IN (4, 5) THEN 3
+    END
 `);
 
 let malestudySatisfaction = await dbQuery(`
   SELECT profession AS Profession,
   CASE
-    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
-    WHEN study_satisfaction = 3 THEN 'Medium (3)'
-    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+    WHEN study_satisfaction IN (1, 2) THEN 'Low Study Satisfaction (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium Study Satisfaction (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High Study Satisfaction (4-5)'
   END AS Satisfaction_Level,
   COUNT(*) AS Amount_Of_Students,
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE gender = 'Male' AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
   GROUP BY profession, Satisfaction_Level
-  ORDER BY profession, Satisfaction_Level
+  ORDER BY   
+  CASE 
+      WHEN study_satisfaction IN (1, 2) THEN 1
+      WHEN study_satisfaction = 3 THEN 2
+      WHEN study_satisfaction IN (4, 5) THEN 3
+    END
 `);
 
 let bothstudySatisfaction = await dbQuery(`
   SELECT profession AS Profession,
   CASE
-    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
-    WHEN study_satisfaction = 3 THEN 'Medium (3)'
-    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+    WHEN study_satisfaction IN (1, 2) THEN 'Low Study Satisfaction (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium Study Satisfaction (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High Study Satisfaction (4-5)'
   END AS Satisfaction_Level,
   COUNT(*) AS Amount_Of_Students,
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -85,7 +95,12 @@ let bothstudySatisfaction = await dbQuery(`
   WHERE gender IN ('Female', 'Male')
   AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
   GROUP BY profession, Satisfaction_Level
-  ORDER BY profession, Satisfaction_Level
+  ORDER BY 
+  CASE 
+      WHEN study_satisfaction IN (1, 2) THEN 1
+      WHEN study_satisfaction = 3 THEN 2
+      WHEN study_satisfaction IN (4, 5) THEN 3
+    END
 `);
 
 let combinedData, title;
@@ -118,20 +133,25 @@ drawGoogleChart({
 
 addMdToPage(`<br>`);
 
-/*
+
 
 let studySatFac = await dbQuery(`
   SELECT 
   CASE 
-    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
-    WHEN study_satisfaction = 3 THEN 'Medium (3)'
-    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+    WHEN study_satisfaction IN (1, 2) THEN 'Low Study Satisfaction (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium Study Satisfaction (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High Study Satisfaction (4-5)'
   END AS Satisfaction_Level,
   AVG(depression) AS Avg_Depression
   FROM results
   WHERE study_satisfaction != 0
   GROUP BY Satisfaction_Level
-  ORDER BY Satisfaction_Level
+  ORDER BY 
+     CASE 
+      WHEN study_satisfaction IN (1, 2) THEN 1
+      WHEN study_satisfaction = 3 THEN 2
+      WHEN study_satisfaction IN (4, 5) THEN 3
+    END
 `);
 
 drawGoogleChart({
@@ -145,7 +165,7 @@ drawGoogleChart({
     colors: ['#3366cc']
   }
 });
-*/
+
 addMdToPage(`<br>`);
 
 let finansStress = await dbQuery(`
@@ -155,14 +175,21 @@ let finansStress = await dbQuery(`
      WHEN financial_stress = 2 THEN 'Minor Financial Stress'
      WHEN financial_stress = 3 THEN 'Moderate Financial Stress'
      WHEN financial_stress = 4 THEN 'Major Financial Stress'
-     WHEN financial_stress = 5 THEN 'Extreme Financial Stress'
+     WHEN financial_stress = 5 THEN 'Severe Financial Stress'
     END AS Financial_Stress,
     COUNT(*) AS Student_Count,
     ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE financial_stress != '?'
   GROUP BY profession, financial_stress
-  ORDER BY profession, financial_stress
+  ORDER BY 
+  CASE financial_stress
+      WHEN 1 THEN 1
+      WHEN 2 THEN 2
+      WHEN 3 THEN 3
+      WHEN 4 THEN 4
+      WHEN 5 THEN 5
+    END
 `);
 
 tableFromData({ data: finansStress });
@@ -176,16 +203,21 @@ let finansStressDepression = await dbQuery(`
      WHEN financial_stress = 2 THEN 'Minor Financial Stress'
      WHEN financial_stress = 3 THEN 'Moderate Financial Stress'
      WHEN financial_stress = 4 THEN 'Major Financial Stress'
-     WHEN financial_stress = 5 THEN 'Extreme Financial Stress'
+     WHEN financial_stress = 5 THEN 'Severe Financial Stress'
     END AS Financial_Stress,
     AVG(depression) AS Avg_Depression
     FROM results
     WHERE financial_stress != '?'
     GROUP BY financial_stress
-    ORDER BY financial_stress 
+    ORDER BY 
+    CASE financial_stress
+      WHEN 1 THEN 1
+      WHEN 2 THEN 2
+      WHEN 3 THEN 3
+      WHEN 4 THEN 4
+      WHEN 5 THEN 5
+    END
 `);
-
-// tableFromData({ data: finansStressDepression });
 
 drawGoogleChart({
   type: 'ColumnChart',
