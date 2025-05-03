@@ -12,8 +12,6 @@ addMdToPage(`
   _____________
 `);
 
-
-
 addMdToPage(`<br>`);
 
 let studySatisfaction = await dbQuery(
@@ -42,6 +40,86 @@ tableFromData({ data: studySatisfaction });
 addMdToPage(`
   <br>`);
 
+let gender = addDropdown('Choose what gender to show', ['Male', 'Female', 'Both']);
+
+let femalestudySatisfaction = await dbQuery(`
+  SELECT profession AS Profession,
+  CASE
+    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+  END AS Satisfaction_Level,
+  COUNT(*) AS Amount_Of_Students,
+  ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
+  FROM results
+  WHERE gender = 'Female' AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
+  GROUP BY profession, Satisfaction_Level
+  ORDER BY profession, Satisfaction_Level
+`);
+
+let malestudySatisfaction = await dbQuery(`
+  SELECT profession AS Profession,
+  CASE
+    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+  END AS Satisfaction_Level,
+  COUNT(*) AS Amount_Of_Students,
+  ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
+  FROM results
+  WHERE gender = 'Male' AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
+  GROUP BY profession, Satisfaction_Level
+  ORDER BY profession, Satisfaction_Level
+`);
+
+let bothstudySatisfaction = await dbQuery(`
+  SELECT profession AS Profession,
+  CASE
+    WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)'
+    WHEN study_satisfaction = 3 THEN 'Medium (3)'
+    WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)'
+  END AS Satisfaction_Level,
+  COUNT(*) AS Amount_Of_Students,
+  ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
+  FROM results
+  WHERE gender IN ('Female', 'Male')
+  AND study_satisfaction != 0 AND study_satisfaction IS NOT NULL AND gender IS NOT NULL
+  GROUP BY profession, Satisfaction_Level
+  ORDER BY profession, Satisfaction_Level
+`);
+
+let combinedData, title;
+if (gender == 'Female') { combinedData = femalestudySatisfaction; title = 'Female students'; }
+
+else if (gender == 'Male') { combinedData = malestudySatisfaction; title = 'Male students'; }
+
+else { combinedData = bothstudySatisfaction; title = 'All students'; };
+
+
+let chartData = [
+  ['Study Satisfaction', 'Percentage']
+];
+combinedData.forEach(row => {
+  chartData.push([row.Satisfaction_Level, row.Percentage]);
+});
+
+
+drawGoogleChart({
+  type: 'PieChart',
+  data: chartData,
+  options: {
+    title,
+    height: 500,
+    vAxis: { title: 'Percentage' },
+    hAxis: { title: 'Study Satisfaction' },
+    colors: ['#0000ff', '#00bfff', '#0080ff'] // olika nyanser av blå
+  }
+});
+
+addMdToPage(`<br>`);
+
+/*
+
 let studySatFac = await dbQuery(`
   SELECT 
   CASE 
@@ -56,9 +134,6 @@ let studySatFac = await dbQuery(`
   ORDER BY Satisfaction_Level
 `);
 
-addMdToPage(`
-  <br>`);
-
 drawGoogleChart({
   type: 'ColumnChart',
   data: makeChartFriendly(studySatFac, 'Study Satisfaction', 'Average Depression'),
@@ -70,7 +145,7 @@ drawGoogleChart({
     colors: ['#3366cc']
   }
 });
-
+*/
 addMdToPage(`<br>`);
 
 let finansStress = await dbQuery(`
