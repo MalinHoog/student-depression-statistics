@@ -9,18 +9,45 @@ addMdToPage(`
   * **High**: 4 - 5
 `);
 
-let allresults = await dbQuery(
+addMdToPage(`<br>`);
+
+let studySatisfaction = await dbQuery(
   "SELECT profession AS Profession, " +
   "CASE " +
   "WHEN study_satisfaction IN (1, 2) THEN 'Low (1-2)' " +
   "WHEN study_satisfaction = 3 THEN 'Medium (3)' " +
   "WHEN study_satisfaction IN (4, 5) THEN 'High (4-5)' " +
   "END AS Satisfaction_Level, " +
-  "COUNT(*) AS Amount_Of_Students " +
+  "COUNT(*) AS Amount_Of_Students, " +
+  "ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage " +
   "FROM results " +
   "WHERE study_satisfaction != 0 " +
   "GROUP BY profession, Satisfaction_Level " +
-  "ORDER BY profession, Satisfaction_Level"
+  "ORDER BY profession, " +
+  "CASE " +
+  "WHEN Satisfaction_Level = 'Low (1-2)' THEN 3 " +
+  "WHEN Satisfaction_Level = 'Medium (3)' THEN 2 " +
+  "WHEN Satisfaction_Level = 'High (4-5)' THEN 1 " +
+  "END "
 );
 
-tableFromData({ data: allresults });
+tableFromData({ data: studySatisfaction });
+
+addMdToPage(`<br>`);
+
+let studentDepression = await dbQuery(
+  "SELECT profession AS Profession, " +
+  "CASE " +
+  "WHEN depression = 0 THEN 'Does Not Feel Depressed' " +
+  "WHEN depression = 1 THEN 'Does Feel Depressed' " +
+  "END AS Depression_Level, " +
+  "COUNT(*) AS Amount_Of_Students, " +
+  "ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage " +
+  "FROM results " +
+  "WHERE depression IS NOT NULL " +
+  "GROUP BY profession, Depression_Level " +
+  "ORDER BY profession, Depression_Level"
+);
+
+
+tableFromData({ data: studentDepression });
