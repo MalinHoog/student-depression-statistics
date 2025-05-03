@@ -2,6 +2,11 @@ addMdToPage(`
   ## About this project
   Welcome reader, this is a school project where I use SQLite and JavaScript to show the results of a dataset regarding students in India and depression. 
 
+  ### India and the education system
+  India is a country with a rich history and diverse culture, with 22 official languages and a population of over 1.4 billion people. It is known for its vibrant festivals, delicious cuisine, and beautiful landscapes. However, India also faces significant challenges, including poverty, inequality, and a complex political landscape.
+  
+  The education system in India is highly competitive, with a strong emphasis on academic performance. Students often face immense pressure to excel in their studies, which can lead to high levels of stress and anxiety. Mental health issues are becoming increasingly recognized in India, but there is still a stigma surrounding them, making it difficult for students to seek help.
+
   _______________
 
   ### Some information about the data
