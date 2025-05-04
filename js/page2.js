@@ -179,7 +179,7 @@ tableFromData({ data: combinedData })
 
 addMdToPage(`<br>`);
 
-let newthing = await dbQuery(`
+let overview = await dbQuery(`
 SELECT profession AS Profession,
   CASE 
     WHEN cgpa < 6 THEN 'Needs Improvement'
@@ -193,7 +193,14 @@ SELECT profession AS Profession,
 FROM results
 WHERE dietary_habits = 'Healthy' AND cgpa !=0
 GROUP BY profession, CGPA_range
-ORDER BY profession, CGPA_range
+ORDER BY 
+CASE 
+WHEN cgpa > 9 THEN 1
+WHEN cgpa BETWEEN 8 AND 9 THEN 2
+WHEN cgpa BETWEEN 7 and 8 THEN 3
+WHEN cgpa BETWEEN 6 and 7 THEN 4
+WHEN cgpa < 6 THEN 5
+END;
   `);
 
-tableFromData({ data: newthing });
+tableFromData({ data: overview });
