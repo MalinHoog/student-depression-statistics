@@ -1,19 +1,25 @@
 addMdToPage(`
-  ## Looking at the data, focusing on depression
+  ## Student's depression and study satisfaction
+ 
   _______________
 
   ### Hypothesis:
-  *Students with low Study Satisfaction are more likely to be depressed*
+  * *Students with low Study Satisfaction are more likely to be depressed*
+  
+  On this page we will look into the data that concerns the student's study satsfaction and the correlation with reported depression. 
 
-  In the data there is a column called *study_satisfaction*, which is a number between 0 and 5. The higher the number, the more satisfied the student is with their studies. But while looking over the data set, I noticed that there are some students that have set their CGPA, Study Satisfaction and Academic Pressure to 0. So when working with the data, I will not include these answers, as it seems they are not real answers. I can only assume that these students did not fill in the survey properly.
-
-  So, to make things more clear I will devide the student's answers into 3 groups, regarding their study satisfaction:
+  To make things more clear I will devide the student's answers into 3 groups, regarding their study satisfaction:
   * **Low**: 1 - 2
   * **Medium**: 3
   * **High**: 4 - 5
 
   _____________
 `);
+
+addMdToPage(`
+  ### Comparing between the genders
+  In this first piechart we can compare the study satisfaction between the genders mentioned in the data: *Female* and *Male*, both also look at the combined data between the two. 
+  `);
 
 let gender = addDropdown('Choose what gender to show', ['Male', 'Female', 'Both']);
 
@@ -108,6 +114,13 @@ drawGoogleChart({
 
 addMdToPage(`<br>`);
 
+addMdToPage(`
+  Percentagewise there is not much differenting the genders in their study satisfaction. Both groups show low and medium satisfaction when it comes to their studies. And just about a fifth of all students report that they have high study satisfaction. 
+  `);
+
+addMdToPage(`<br>`);
+
+
 let studySatisfaction = await dbQuery(
   "SELECT profession AS Profession, " +
   "gender AS Gender, " +
@@ -134,7 +147,12 @@ tableFromData({ data: studySatisfaction });
 addMdToPage(`
   <br>`);
 
+addMdToPage(`
+  When we instead look into "the correlation between Study Satisfaction and Depression" diagram we can determine that the more unsatisfied the student's are with their study perfomance, more students report feeling depressed. Which might not be suprising, but even the students with high study satisfaction show that they experience depression. 
+  `);
 
+addMdToPage(`
+  <br>`);
 
 let studySatFac = await dbQuery(`
   SELECT 
@@ -161,7 +179,10 @@ drawGoogleChart({
   options: {
     title: 'The correlation between Study Satisfaction and Depression',
     height: 500,
-    vAxis: { title: 'Depression (0–1)' },
+    vAxis: {
+      title: 'Depression (0–1)',
+      viewWindow: { min: 0 }
+    },
     hAxis: { title: 'Study Satisfaction' },
     colors: ['#3366cc']
   }
@@ -176,6 +197,10 @@ addMdToPage(`
   * *Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.*
   _____________
 `);
+
+addMdToPage(`
+  Another factor that can play tricks on the mind of the student is the burden of finacial stress. Being a student usually means that the budget is pretty tight to go around, which can lead to mental health struggling even more. The mayority of the students report that they struggle from thinking about the financial stress. Escpecially since studying in India isn't free. 
+  `);
 
 addMdToPage(`<br>`);
 
@@ -245,7 +270,7 @@ drawGoogleChart({
 });
 
 addMdToPage(`<br>`);
-
+/*
 let studentDepression = await dbQuery(
   "SELECT profession AS Profession, " +
   "gender AS Gender, " +
@@ -262,10 +287,10 @@ let studentDepression = await dbQuery(
 );
 
 tableFromData({ data: studentDepression });
-
+*/
 addMdToPage(`<br>`);
 
-let sucidical = addDropdown('Compare Financial Stress and Depression depending on Sucidial Thoughts', ['Yes', 'No', 'Both']);
+let sucidical = addDropdown('Compare Financial Stress and Depression depending on Sucidial Thoughts', ['Students with Sucidial Thoughts', 'Students without Sucidial Thoughts', 'Both']);
 
 let studentDepSucidial = await dbQuery(`
 SELECT 
@@ -276,7 +301,7 @@ SELECT
     WHEN financial_stress = 4 THEN 'Major Financial Stress'
     WHEN financial_stress = 5 THEN 'Severe Financial Stress'
   END AS Financial_Stress,
-  AVG(depression) AS Avg_Dep
+  AVG(depression) AS Average_Depression
 FROM results
 WHERE financial_stress != '?' AND suidical_thoughts = 1
 GROUP BY financial_stress
@@ -299,7 +324,7 @@ SELECT
     WHEN financial_stress = 4 THEN 'Major Financial Stress'
     WHEN financial_stress = 5 THEN 'Severe Financial Stress'
   END AS Financial_Stress,
-  AVG(depression) AS Avg_Dep
+  AVG(depression) AS Average_Depression
 FROM results
 WHERE financial_stress != '?' AND suidical_thoughts = 0
 GROUP BY financial_stress
@@ -322,7 +347,7 @@ SELECT
     WHEN financial_stress = 4 THEN 'Major Financial Stress'
     WHEN financial_stress = 5 THEN 'Severe Financial Stress'
   END AS Financial_Stress,
-  AVG(depression) AS Avg_Dep
+  AVG(depression) AS Average_Depression
 FROM results
 WHERE financial_stress != '?' AND suidical_thoughts IN (0, 1)
 GROUP BY financial_stress
@@ -337,19 +362,16 @@ ORDER BY
   `);
 
 let combinedSucidialData, title1;
-if (sucidical === 'Yes') {
+if (sucidical === 'Students with Sucidial Thoughts') {
   combinedSucidialData = studentDepSucidial;
-  title1 = 'Students who have suicidal thoughts';
-} else if (sucidical === 'No') {
+  title1 = 'Students with Sucidial Thoughts';
+} else if (sucidical === 'Students without Sucidial Thoughts') {
   combinedSucidialData = studentDepNotSucidial;
-  title1 = 'Students who do not have suicidal thoughts';
+  title1 = 'Students without Sucidial Thoughts';
 } else {
   combinedSucidialData = studentDepSucidicalBoth;
   title1 = 'All students';
 };
-
-
-// tableFromData({ data: studentDepSucidial });
 
 
 drawGoogleChart({
@@ -358,8 +380,12 @@ drawGoogleChart({
   options: {
     title: 'The correlation between Financial Stress, Sucidical Thoughts and Depression',
     height: 500,
-    vAxis: { title: 'Avg Dep' },
+    vAxis: {
+      title: 'Avg Dep',
+      viewWindow: { min: 0 }
+    },
     hAxis: { title: 'Financial Stress' },
     colors: ['#3366cc']
   }
 });
+tableFromData({ data: combinedSucidialData });
