@@ -12,7 +12,7 @@ addMdToPage(`
   _____________
 `);
 
-let something = addDropdown('Compare Financial Stress and Depression depending och Sucidial Thoughts', ['Yes', 'No', 'Both']);
+let sucidical = addDropdown('Compare Financial Stress and Depression depending on Sucidial Thoughts', ['Yes', 'No', 'Both']);
 
 let studentDepSucidial = await dbQuery(`
 SELECT 
@@ -37,23 +37,6 @@ ORDER BY
     END
 `);
 
-// tableFromData({ data: studentDepSucidial });
-
-
-drawGoogleChart({
-  type: 'ColumnChart',
-  data: makeChartFriendly(studentDepSucidial, 'Financial Stress', 'Avg Dep'),
-  options: {
-    title: 'The correlation between Financial Stress, Sucidical Thoughts and Depression',
-    height: 500,
-    vAxis: { title: 'Avg Dep' },
-    hAxis: { title: 'Financial Stress' },
-    colors: ['#3366cc']
-  }
-});
-
-addMdToPage(`<br/>`)
-
 let studentDepNotSucidial = await dbQuery(`
 SELECT 
   CASE 
@@ -77,6 +60,60 @@ ORDER BY
     END
   `);
 
+let studentDepSucidicalBoth = await dbQuery(`
+SELECT 
+  CASE 
+    WHEN financial_stress = 1 THEN 'No Financial Stress'
+    WHEN financial_stress = 2 THEN 'Minor Financial Stress'
+    WHEN financial_stress = 3 THEN 'Moderate Financial Stress'
+    WHEN financial_stress = 4 THEN 'Major Financial Stress'
+    WHEN financial_stress = 5 THEN 'Severe Financial Stress'
+  END AS Financial_Stress,
+  AVG(depression) AS Avg_Dep
+FROM results
+WHERE financial_stress != '?' AND suidical_thoughts IN (0, 1)
+GROUP BY financial_stress
+ORDER BY 
+ CASE financial_stress
+      WHEN 1 THEN 1
+      WHEN 2 THEN 2
+      WHEN 3 THEN 3
+      WHEN 4 THEN 4
+      WHEN 5 THEN 5
+    END
+  `);
+
+let combinedSucidialData, title1;
+if (sucidical === 'Yes') {
+  combinedSucidialData = studentDepSucidial;
+  title1 = 'Students who have suicidal thoughts';
+} else if (sucidical === 'No') {
+  combinedSucidialData = studentDepNotSucidial;
+  title1 = 'Students who do not have suicidal thoughts';
+} else {
+  combinedSucidialData = studentDepSucidicalBoth;
+  title1 = 'All students';
+};
+
+
+// tableFromData({ data: studentDepSucidial });
+
+
+drawGoogleChart({
+  type: 'ColumnChart',
+  data: makeChartFriendly(combinedSucidialData, 'Financial Stress', 'Avg Dep'),
+  options: {
+    title: 'The correlation between Financial Stress, Sucidical Thoughts and Depression',
+    height: 500,
+    vAxis: { title: 'Avg Dep' },
+    hAxis: { title: 'Financial Stress' },
+    colors: ['#3366cc']
+  }
+});
+
+addMdToPage(`<br/>`)
+
+/*
 drawGoogleChart({
   type: 'ColumnChart',
   data: makeChartFriendly(studentDepNotSucidial, 'Financial Stress', 'Avg Dep'),
@@ -88,8 +125,11 @@ drawGoogleChart({
     colors: ['#3366cc']
   }
 });
+*/
 
-tableFromData({ data: studentDepNotSucidial });
+addMdToPage(`<br>`);
+
+// tableFromData({ data: studentDepNotSucidial });
 
 
 
