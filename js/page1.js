@@ -8,16 +8,18 @@ addMdToPage(`
   
   On this page we will look into the data that concerns the student's study satsfaction and the correlation with reported depression. 
 
-  To make things more clear I will devide the student's answers into 3 groups, regarding their study satisfaction:
-  * **Low**: 1 - 2
-  * **Medium**: 3
-  * **High**: 4 - 5
-
   _____________
 `);
 
 addMdToPage(`
   ### Comparing between the genders
+
+  *Disclaimer:*
+  To make things more clear I will divide the student's answers into 3 groups, regarding their study satisfaction:
+  * **Low**: 1 - 2
+  * **Medium**: 3
+  * **High**: 4 - 5
+
   In this first piechart we can compare the study satisfaction between the genders mentioned in the data: *Female* and *Male*, both also look at the combined data between the two. 
   `);
 
