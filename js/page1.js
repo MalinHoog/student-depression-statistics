@@ -199,7 +199,8 @@ addMdToPage(`
 `);
 
 addMdToPage(`
-  Another factor that can play tricks on the mind of the student is the burden of finacial stress. Being a student usually means that the budget is pretty tight to go around, which can lead to mental health struggling even more. The mayority of the students report that they struggle from thinking about the financial stress. Escpecially since studying in India isn't free. 
+  Another factor that can weigh heavily on a student's mind is financial stress.
+  Being a student often means living on a tight budget, which can significantly impact mental well-being. A majority of students report that financial concerns are a constant source of stress — especially in a country like India, where education comes at a cost. The pressure of managing expenses while trying to focus on studies can take a serious toll on mental health.
   `);
 
 addMdToPage(`<br>`);
@@ -288,6 +289,12 @@ let studentDepression = await dbQuery(
 
 tableFromData({ data: studentDepression });
 */
+addMdToPage(`<br>`);
+
+addMdToPage(`
+  It may not come as a surprise that financial stress and depression can influence suicidal thoughts among students. However, when comparing levels of financial stress and depression with the prevalence of suicidal ideation, the connection becomes even more evident. This highlights just how crucial it is to ensure students have the financial support they need in order to maintain both their academic focus and mental well-being.
+  `);
+
 addMdToPage(`<br>`);
 
 let sucidical = addDropdown('Compare Financial Stress and Depression depending on Sucidial Thoughts', ['Students with Sucidial Thoughts', 'Students without Sucidial Thoughts', 'Both']);
@@ -381,11 +388,31 @@ drawGoogleChart({
     title: 'The correlation between Financial Stress, Sucidical Thoughts and Depression',
     height: 500,
     vAxis: {
-      title: 'Avg Dep',
-      viewWindow: { min: 0 }
+      title: 'Avgerage Depression',
+      viewWindow: {
+        min: 0,
+        max: 1
+      }
     },
     hAxis: { title: 'Financial Stress' },
     colors: ['#3366cc']
   }
 });
 tableFromData({ data: combinedSucidialData });
+
+addMdToPage(`<br>`);
+
+addMdToPage(`_______________`);
+
+addMdToPage(`
+  ## Conclusion
+
+  The two hypothesis we have been looking at are these:
+  * *Students with low Study Satisfaction are more likely to be depressed.* 
+  * *Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.*
+  
+  Regarding the first hypothesis, we can unfortunately observe that a general sense of depression exists among students. However, the data indicates a clear trend: higher levels of study satisfaction are associated with lower levels of depression. In fact, students who report being dissatisfied with their studies tend to experience significantly more depressive symptoms compared to those who are more content.
+
+  As for the second hypothesis, the findings also support its validity. It becomes evident — though both surprising and understandable—just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
+
+  `);
