@@ -12,6 +12,43 @@ addMdToPage(`
   _____________
 `);
 
+let studentDepSucidial = await dbQuery(`
+  SELECT 
+    gender AS Gender,
+    CASE 
+      WHEN depression = 0 THEN 'Does Not Feel Depressed'
+      WHEN depression = 1 THEN 'Does Feel Depressed'
+    END AS Depression_Level,
+    COUNT(*) AS Amount_Of_Students,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY gender), 1) AS Percentage
+  FROM results 
+  WHERE suidical_thoughts = 1
+  GROUP BY Depression_Level, gender
+  ORDER BY Depression_Level, gender
+`);
+
+
+tableFromData({ data: studentDepSucidial });
+
+
+let studentDepNotSucidial = await dbQuery(`
+  SELECT 
+    gender AS Gender,
+    CASE 
+      WHEN depression = 0 THEN 'Does Not Feel Depressed'
+      WHEN depression = 1 THEN 'Does Feel Depressed'
+    END AS Depression_Level,
+    COUNT(*) AS Amount_Of_Students,
+    ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY gender), 1) AS Percentage
+  FROM results 
+  WHERE suidical_thoughts = 0
+  GROUP BY Depression_Level, gender
+  ORDER BY Depression_Level, gender
+  `);
+
+tableFromData({ data: studentDepNotSucidial });
+
+
 addMdToPage(`<br>`);
 
 let studySatisfaction = await dbQuery(
@@ -168,6 +205,10 @@ drawGoogleChart({
 
 addMdToPage(`<br>`);
 
+addMdToPage(`______________`);
+
+addMdToPage(`<br>`);
+
 let finansStress = await dbQuery(`
   SELECT profession AS Profession,
     CASE 
@@ -233,8 +274,6 @@ drawGoogleChart({
   colors: ['#3366cc']
 });
 
-
-
 addMdToPage(`<br>`);
 
 let studentDepression = await dbQuery(
@@ -255,3 +294,4 @@ let studentDepression = await dbQuery(
 tableFromData({ data: studentDepression });
 
 addMdToPage(`<br>`);
+
