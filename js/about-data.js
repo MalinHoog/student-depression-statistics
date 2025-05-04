@@ -26,6 +26,6 @@ addMdToPage(`
   ### Hypothesis
   * Students with low Study Satisfaction are more likely to be depressed. 
   * Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.
-  * Students with good Dietary Habits are less likely to have a low CGPA and better Study Satsfaction.
-  * Students with good Sleeping Habits are less likely to have a low CGPA, and less Sucidial Thoughts.
+  * Students with good Dietary Habits are less likely to have a low CGPA.
+  * Students with good Sleeping Habits are less likely to have a low CGPA.
   `);
