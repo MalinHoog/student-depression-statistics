@@ -1,5 +1,5 @@
 addMdToPage(`
-  ## Sleeping Habits among students
+  ## Sleeping habits among students
 
   ### Hypothesis
   * *Students with good Sleeping Habits are less likely to have a low CGPA.*
