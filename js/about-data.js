@@ -2,10 +2,15 @@ addMdToPage(`
   ## About this project
   Welcome reader, this is a school project where I use SQLite and JavaScript to show the results of a dataset regarding students in India and depression. 
 
+  ### India and the education system
+  India is a country with a rich history and diverse culture, with 22 official languages and a population of over 1.4 billion people. It is known for its vibrant festivals, delicious cuisine, and beautiful landscapes. However, India also faces significant challenges, including poverty, inequality, and a complex political landscape.
+  
+  The education system in India is highly competitive, with a strong emphasis on academic performance. Students often face immense pressure to excel in their studies, which can lead to high levels of stress and anxiety. Mental health issues are becoming increasingly recognized in India, but there is still a stigma surrounding them, making it difficult for students to seek help.
+
   _______________
 
   ### Some information about the data
-  * The orginal data has been cleaned due to some answers being not relevant, such as profession being anything else than *Student*. The data is from a survey where students answered questions about their mental health and other relevant factors. About 31 of the answers were therefore not relevant and have been removed.
+  * The orginal data has been cleaned due to some answers being not relevant, such as profession being anything else than *Student*. The data is from a survey where Indian students answered questions about their mental health and other relevant factors. About 31 of the answers were therefore not relevant and have been removed.
 
   * Other than that I have changed answers in some coloumns, such as *Suidical Thoughts*, to be 0 and 1, instead of Yes and No. The same change has been made to the coloumn that regards *Family History of Mental Illness*.
 
@@ -16,16 +21,11 @@ addMdToPage(`
   ### The story
   As a student myself, I also face challenges with mental health, trying to balance school, work, sleep, and a social life. On top of that, I often struggle with feeling satisfied with my academic performance, while trying to maintain healthy habits, stay on top of my finances, and take care of my dog.
 
-  There is much more to discuss about this topic, but looking at the data I start wondering about a few things, some more complex than others:
-   * How is the gender distibution amoing the students that are depressed? 
-   * Are the students with financial stress more likely to be depressed?
-  * How many of the students say they are depressed? And how many of them have suicidal thoughts? Is there any difference if the person has a family history of mental illness?
-  * Does the students' sleeping duration affect their study satisfaction? Or their CGPA (Cumulative Grade Point Average)?
-  * How many of the students feel academic pressure? And how does that affect their study satisfaction?
+  That’s why I’ve chosen the theme *"The Balance of Being a Student"*, to explore how different aspects of student life — like sleep, diet, financial stress and academic pressure — impact mental health, study satisfaction, and the likelihood of experiencing depression.
 
   ### Hypothesis
-  Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.<br>
-  Students with low Study Satisfaction are more likely to be depressed. <br>
-  Students with good Dietary Habits are less likely to have a low CGPA. <br>
-  Students with good Sleeping Habits are less likely to have a low CGPA, and less Sucidial Thoughts.
+  * Students with low Study Satisfaction are more likely to be depressed. 
+  * Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.
+  * Students with good Dietary Habits are less likely to have a low CGPA.
+  * Students with good Sleeping Habits are less likely to have a low CGPA.
   `);

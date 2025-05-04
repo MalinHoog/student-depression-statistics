@@ -1,7 +1,7 @@
 createMenu('Statistics Template JS', [
   { name: 'About the Data', script: 'about-data.js' },
-  { name: 'Page1', script: 'page1.js' },
-  { name: 'Page2', script: 'page2.js' },
-  { name: 'Page3', script: 'page3.js' },
+  { name: 'Depression and Financial Stress', script: 'page1.js' },
+  { name: 'Dietary Habits', script: 'page2.js' },
+  { name: 'Sleeping Habits', script: 'page3.js' },
   { name: 'Sources', script: 'sources.js' }
 ]);
