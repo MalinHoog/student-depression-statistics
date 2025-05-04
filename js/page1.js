@@ -272,25 +272,7 @@ drawGoogleChart({
   colors: ['#3366cc']
 });
 
-addMdToPage(`<br>`);
-/*
-let studentDepression = await dbQuery(
-  "SELECT profession AS Profession, " +
-  "gender AS Gender, " +
-  "CASE " +
-  "WHEN depression = 0 THEN 'Does Not Feel Depressed' " +
-  "WHEN depression = 1 THEN 'Does Feel Depressed' " +
-  "END AS Depression_Level, " +
-  "COUNT(*) AS Amount_Of_Students, " +
-  "ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession, gender), 1) AS Percentage " +
-  "FROM results " +
-  "WHERE depression IS NOT NULL AND gender IS NOT NULL " +
-  "GROUP BY profession, gender, Depression_Level " +
-  "ORDER BY profession, gender, Depression_Level"
-);
 
-tableFromData({ data: studentDepression });
-*/
 addMdToPage(`<br>`);
 
 addMdToPage(`
