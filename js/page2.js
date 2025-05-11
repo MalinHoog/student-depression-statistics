@@ -54,7 +54,7 @@ tableFromData({ data: overview });
 
 addMdToPage(`
   **Understanding CGPA Levels** <br>
-  While interpretations can vary, the following serves as a general guideline:
+  While interpretations can vary, the following serves as a general guideline that I've used in this project:
 
   * **Excellent** – 9.0 and above:
   Reflects top academic performance and access to elite opportunities.

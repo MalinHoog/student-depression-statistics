@@ -17,4 +17,7 @@ addMdToPage(`
 
   **Learnyhive**
   * https://www.learnyhive.com/what-is-a-good-cgpa/ 
+  
+  **Scholaro**
+  * https://www.scholaro.com/db/News/the-cost-of-higher-education-in-india-62
   `);

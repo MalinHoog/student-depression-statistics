@@ -33,6 +33,12 @@ addMdToPage(`<br>`);
 
 addMdToPage(`____________`);
 
+addMdToPage(`
+  ### Final Thoughts 
+  - sleeping missing an answer
+  - 
+  `);
+
 addMdToPage(`<br>`);
 
 addMdToPage(`
