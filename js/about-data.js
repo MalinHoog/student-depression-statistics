@@ -21,7 +21,7 @@ addMdToPage(`
   ### The story
   As a student myself, I also face challenges with mental health, trying to balance school, work, sleep, and a social life. On top of that, I often struggle with feeling satisfied with my academic performance, while trying to maintain healthy habits, stay on top of my finances, and take care of my dog.
 
-  That’s why I’ve chosen the theme *"The Balance of Being a Student"*, to explore how different aspects of student life — like sleep, diet, financial stress and academic pressure — impact mental health, study satisfaction, and the likelihood of experiencing depression.
+  That’s why I’ve chosen the theme *"The Balance of Being a Student"*, to explore how different aspects of student life - like sleep, diet, financial stress and academic pressure - impact mental health, study satisfaction, and the likelihood of experiencing depression.
 
   ### Hypothesis
   * Students with low Study Satisfaction are more likely to be depressed. 

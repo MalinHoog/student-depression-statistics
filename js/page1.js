@@ -204,7 +204,7 @@ addMdToPage(`
 
 addMdToPage(`
   Another factor that can weigh heavily on a student's mind is financial stress.
-  Being a student often means living on a tight budget, which can significantly impact mental well-being. A majority of students report that financial concerns are a constant source of stress — especially in a country like India, where education comes at a cost. The pressure of managing expenses while trying to focus on studies can take a serious toll on mental health.
+  Being a student often means living on a tight budget, which can significantly impact mental well-being. A majority of students report that financial concerns are a constant source of stress - especially in a country like India, where education comes at a cost. The pressure of managing expenses while trying to focus on studies can take a serious toll on mental health.
   `);
 
 addMdToPage(`<br>`);
@@ -400,6 +400,6 @@ addMdToPage(`
   
   Regarding the **first hypothesis**, we can unfortunately observe that a general sense of depression exists among students. However, the data indicates a clear trend: higher levels of study satisfaction are associated with lower levels of depression. In fact, students who report being dissatisfied with their studies tend to experience significantly more depressive symptoms compared to those who are more content.
 
-  As for the **second hypothesis**, the findings also support its validity. It becomes evident — though both surprising and understandable—just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
+  As for the **second hypothesis**, the findings also support its validity. It becomes evident - though both surprising and understandable - just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
 
   `);

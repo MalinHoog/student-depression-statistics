@@ -8,7 +8,7 @@ addMdToPage(`
 
 addMdToPage(`
   One aspect of student life that often goes overlooked is diet.
-  While it’s widely known that a healthy diet contributes to improved well-being and longevity, maintaining good eating habits can be particularly challenging for students. Between academic pressures, time constraints, and limited budgets, prioritizing nutritious meals isn't always easy. In times of stress, many — myself included — turn to fast food or delivery apps as a way to save time and stay focused on studies.
+  While it’s widely known that a healthy diet contributes to improved well-being and longevity, maintaining good eating habits can be particularly challenging for students. Between academic pressures, time constraints, and limited budgets, prioritizing nutritious meals isn't always easy. In times of stress, many - myself included - turn to fast food or delivery apps as a way to save time and stay focused on studies.
 
   However, this raises an important question: How does a student’s diet influence their academic performance, particularly their average CGPA*? <br>
   **CGPA = Cumulative Grade Point Average.* <br>
@@ -247,11 +247,11 @@ tableFromData({ data: combinedData })
 addMdToPage(`<br>`);
 
 addMdToPage(`
-In the data above reveals a somewhat unexpected trend regarding students’ dietary habits and academic performance. Contrary to what one might assume, there appears to be little variation in diet quality based on students' CGPA. While the majority of students report following an unhealthy diet, their academic performance remains relatively close to the average—suggesting that poor dietary choices do not immediately translate to lower grades.
+In the data above reveals a somewhat unexpected trend regarding students’ dietary habits and academic performance. Contrary to what one might assume, there appears to be little variation in diet quality based on students' CGPA. While the majority of students report following an unhealthy diet, their academic performance remains relatively close to the average - suggesting that poor dietary choices do not immediately translate to lower grades.
 
 Interestingly, even among high-achieving students with a CGPA above 9.0, unhealthy eating habits are still prevalent. These students often prioritize academic success over personal health, choosing to sacrifice a balanced diet in order to devote more time and energy to their studies.
 
-On the other hand, students with lower grades tend to be more committed to maintaining a healthy lifestyle. While their academic results may not be as strong, their dedication to healthier eating suggests a different set of priorities—perhaps aiming for long-term well-being over short-term academic pressure.
+On the other hand, students with lower grades tend to be more committed to maintaining a healthy lifestyle. While their academic results may not be as strong, their dedication to healthier eating suggests a different set of priorities - perhaps aiming for long-term well-being over short-term academic pressure.
   `);
 
 addMdToPage(`<br>`);

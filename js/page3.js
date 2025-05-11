@@ -5,18 +5,18 @@ addMdToPage(`
 
   Another significant factor that greatly impacts a student's well-being is sleep. Sleep plays a vital role in maintaining both physical and mental health, and is essential for concentration, memory retention, and emotional regulation. For students, who often juggle tight schedules, academic demands, and personal responsibilities, getting enough sleep can be a challenge.
 
-  Lack of sufficient rest doesn't just lead to tiredness — it can contribute to increased stress levels, weakened immune function, and even long-term health issues. Despite its importance, sleep is often sacrificed in favor of late-night study sessions or trying to keep up with deadlines, ultimately affecting not only academic performance but overall quality of life.
+  Lack of sufficient rest doesn't just lead to tiredness - it can contribute to increased stress levels, weakened immune function, and even long-term health issues. Despite its importance, sleep is often sacrificed in favor of late-night study sessions or trying to keep up with deadlines, ultimately affecting not only academic performance but overall quality of life.
 
   Therefore we are taking a look at how students sleeping habits can affect their grades. 
 
   ### Hypothesis
-  * *Students with good Sleeping Habits are less likely to have a low CGPA.*
+  * *Students with good Sleeping Habits are less likely to have a low CGPA.** <br>
+  **CGPA = Cumulative Grade Point Average.* 
   _______________
   `);
 
 
-
-let cgpa = addDropdown('Check the sleeping habits based on students CGPA', ['Below 6.0', 'Between 6 and 7', 'Between 7 and 8', 'Between 8 and 9', 'Above 9', 'All CGPA']);
+let cgpa = addDropdown('Check the sleeping habits based on students CGPA', ['Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA']);
 
 let sleepingHabits = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
@@ -32,7 +32,7 @@ let sleepingHabits1 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa < 6 
+  AND cgpa BETWEEN 5 AND 5.9
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -42,7 +42,7 @@ let sleepingHabits2 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 6 and 7
+  AND cgpa BETWEEN 6 and 6.9
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -52,7 +52,7 @@ let sleepingHabits3 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 7 and 8
+  AND cgpa BETWEEN 7 and 7.7
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -62,7 +62,7 @@ let sleepingHabits4 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 8 and 9
+  AND cgpa BETWEEN 8 and 8.9
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -77,16 +77,18 @@ let sleepingHabits5 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
+// 'Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA'
+
 let combinedData, title;
-if (cgpa == 'Below 6.0') { combinedData = sleepingHabits1; title = 'Sleeping habits of students with cgpa below 6'; }
+if (cgpa == 'Needs Improvement') { combinedData = sleepingHabits1; title = 'Sleeping habits of students with CGPA between 5.0 and 5.9'; }
 
-else if (cgpa == 'Between 6 and 7') { combinedData = sleepingHabits2; title = 'Sleeping habits of students with cgpa between 6 and 7'; }
+else if (cgpa == 'Average') { combinedData = sleepingHabits2; title = 'Sleeping habits of students with CGPA between 6.0 and 6.9'; }
 
-else if (cgpa == 'Between 7 and 8') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with cgpa between 7 and 8'; }
+else if (cgpa == 'Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 7.0 and 7.9'; }
 
-else if (cgpa == 'Between 8 and 9') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with cgpa between 8 and 9'; }
+else if (cgpa == 'Very Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 8.0 and 8.9'; }
 
-else if (cgpa == 'Above 9') { combinedData = sleepingHabits4; title = 'Sleeping habits of students with cgpa above 9'; }
+else if (cgpa == 'Excellent') { combinedData = sleepingHabits4; title = 'Sleeping habits of students with cgpa above 9.0'; }
 
 else { combinedData = sleepingHabits; title = 'All CGPA'; };
 
