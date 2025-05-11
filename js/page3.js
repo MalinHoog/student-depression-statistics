@@ -116,9 +116,9 @@ tableFromData({ data: combinedData });
 addMdToPage(`<br>`);
 
 addMdToPage(`
-  The data suggests that many students are not getting sufficient sleep on a regular basis. This may not always be a matter of poor time management — often, elevated stress levels or symptoms of depression can interfere with the ability to fall asleep or maintain restful sleep. Unfortunately, the majority of students appear to be sleeping fewer than six hours per night, which is a concerning trend considering the vital role sleep plays in cognitive function and emotional resilience.
+  The data suggests that many students are not getting sufficient sleep on a regular basis. This may not always be a matter of poor time management - often, elevated stress levels or symptoms of depression can interfere with the ability to fall asleep or maintain restful sleep. Unfortunately, the majority of students appear to be sleeping fewer than six hours per night, which is a concerning trend considering the vital role sleep plays in cognitive function and emotional resilience.
 
-  Interestingly, even students with a CGPA above 9.0 seem to get less sleep than their peers with lower academic scores. This could indicate that high-performing students sacrifice rest in order to maintain their academic standing. Meanwhile, students with mid-range grades — those scoring between 6 and 7—appear to prioritize sleep slightly more, potentially recognizing its importance for sustaining performance over time.
+  Interestingly, even students with a CGPA above 9.0 seem to get less sleep than their peers with lower academic scores. This could indicate that high-performing students sacrifice rest in order to maintain their academic standing. Meanwhile, students with mid-range grades - those scoring between 6 and 7 - appear to prioritize sleep slightly more, potentially recognizing its importance for sustaining performance over time.
   `);
 
 addMdToPage(`<br>`);
@@ -128,10 +128,9 @@ addMdToPage(`_________________`);
 addMdToPage(`
   ## Conclusion
 
-  ### Hypothesis
   * *Students with good Sleeping Habits are less likely to have a low CGPA.*
 
-  Surprisingly, the hypothesis that better sleep leads to better academic performance does not align with the data. In fact, students with the highest CGPA scores often report sleeping fewer hours than those with lower grades. This suggests that many high-achieving students may be sacrificing sleep—and even diet—for the sake of academic success.
+  Surprisingly, the hypothesis that better sleep leads to better academic performance does not align with the data. In fact, students with the highest CGPA scores often report sleeping fewer hours than those with lower grades. This suggests that many high-achieving students may be sacrificing sleep - and even diet - for the sake of academic success.
 
   Across the board, we see a recurring theme: health and well-being are often deprioritized in student life. While performance is important, these results highlight the need for better balance between academic goals and personal health.
   `);
