@@ -32,7 +32,7 @@ let sleepingHabits1 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 5 AND 5.9
+  AND cgpa BETWEEN 5 AND 5.99
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -42,7 +42,7 @@ let sleepingHabits2 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 6 and 6.9
+  AND cgpa BETWEEN 6 and 6.99
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -52,7 +52,7 @@ let sleepingHabits3 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 7 and 7.7
+  AND cgpa BETWEEN 7 and 7.99
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -62,7 +62,7 @@ let sleepingHabits4 = await dbQuery(`
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
-  AND cgpa BETWEEN 8 and 8.9
+  AND cgpa BETWEEN 8 and 8.99
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
@@ -80,13 +80,13 @@ let sleepingHabits5 = await dbQuery(`
 // 'Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA'
 
 let combinedData, title;
-if (cgpa == 'Needs Improvement') { combinedData = sleepingHabits1; title = 'Sleeping habits of students with CGPA between 5.0 and 5.9'; }
+if (cgpa == 'Needs Improvement') { combinedData = sleepingHabits1; title = 'Sleeping habits of students with CGPA between 5.0 and 5.99'; }
 
-else if (cgpa == 'Average') { combinedData = sleepingHabits2; title = 'Sleeping habits of students with CGPA between 6.0 and 6.9'; }
+else if (cgpa == 'Average') { combinedData = sleepingHabits2; title = 'Sleeping habits of students with CGPA between 6.0 and 6.99'; }
 
-else if (cgpa == 'Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 7.0 and 7.9'; }
+else if (cgpa == 'Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 7.0 and 7.99'; }
 
-else if (cgpa == 'Very Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 8.0 and 8.9'; }
+else if (cgpa == 'Very Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 8.0 and 8.99'; }
 
 else if (cgpa == 'Excellent') { combinedData = sleepingHabits4; title = 'Sleeping habits of students with cgpa above 9.0'; }
 
@@ -107,8 +107,6 @@ drawGoogleChart({
   options: {
     title,
     height: 600,
-    vAxis: { title: 'no title' },
-    hAxis: { title: 'no title' },
     colors: ['#80ccff', '#1aa3ff', '#b3e0ff', '006bb3'] // olika nyanser av blå
   }
 });

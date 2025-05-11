@@ -29,10 +29,10 @@ addMdToPage(`<br>`);
 let overview = await dbQuery(`
 SELECT profession AS Profession,
   CASE 
-    WHEN cgpa < 6 THEN 'Needs Improvement'
-    WHEN cgpa BETWEEN 6 and 7 THEN 'Average'
-    WHEN cgpa BETWEEN 7 and 8 THEN 'Good'
-    WHEN cgpa BETWEEN 8 AND 9 THEN 'Very Good'
+    WHEN cgpa BETWEEN 5 AND 5.99 THEN 'Needs Improvement'
+    WHEN cgpa BETWEEN 6 and 6.99 THEN 'Average'
+    WHEN cgpa BETWEEN 7 and 7.99 THEN 'Good'
+    WHEN cgpa BETWEEN 8 AND 8.99 THEN 'Very Good'
     WHEN cgpa > 9 THEN 'Excellent'
   END AS CGPA_range,
   COUNT(*) AS Amount_Of_Students,
@@ -43,10 +43,10 @@ GROUP BY profession, CGPA_range
 ORDER BY 
 CASE 
 WHEN cgpa > 9 THEN 1
-WHEN cgpa BETWEEN 8 AND 9 THEN 2
-WHEN cgpa BETWEEN 7 and 8 THEN 3
-WHEN cgpa BETWEEN 6 and 7 THEN 4
-WHEN cgpa < 6 THEN 5
+WHEN cgpa BETWEEN 8 AND 8.99 THEN 2
+WHEN cgpa BETWEEN 7 and 7.99 THEN 3
+WHEN cgpa BETWEEN 6 and 6.99 THEN 4
+WHEN cgpa BETWEEN 5 AND 5.99 THEN 5
 END;
   `);
 
@@ -107,7 +107,7 @@ SELECT
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
 FROM results
 WHERE dietary_habits != 'Others'
-AND cgpa <6
+AND cgpa BETWEEN 5 AND 5.99
 GROUP BY profession, dietary_habits
 ORDER BY profession, dietary_habits;
   `);
@@ -124,7 +124,7 @@ SELECT
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
 FROM results
 WHERE dietary_habits != 'Others'
-AND cgpa BETWEEN 6 and 7
+AND cgpa BETWEEN 6 AND 6.99
 GROUP BY profession, dietary_habits
 ORDER BY profession, dietary_habits;
   `);
@@ -141,7 +141,7 @@ SELECT
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
 FROM results
 WHERE dietary_habits != 'Others'
-AND cgpa BETWEEN 7 and 8
+AND cgpa BETWEEN 7 and 7.99
 GROUP BY profession, dietary_habits
 ORDER BY profession, dietary_habits;
   `);
@@ -158,7 +158,7 @@ SELECT
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
 FROM results
 WHERE dietary_habits != 'Others'
-AND cgpa BETWEEN 8 and 9
+AND cgpa BETWEEN 8 and 8.99
 GROUP BY profession, dietary_habits
 ORDER BY profession, dietary_habits;
   `);
@@ -182,13 +182,13 @@ ORDER BY profession, dietary_habits;
 
 
 let combinedData, title;
-if (cgpadiet == 'Needs Improvement') { combinedData = foodhabitscgpa1; title = 'Diet habits of students with cgpa below 5.9'; }
+if (cgpadiet == 'Needs Improvement') { combinedData = foodhabitscgpa1; title = 'Diet habits of students with cgpa below 5.99'; }
 
-else if (cgpadiet == 'Average') { combinedData = foodhabitscgpa2; title = 'Diet habits of students with cgpa between 6 and 6.9'; }
+else if (cgpadiet == 'Average') { combinedData = foodhabitscgpa2; title = 'Diet habits of students with cgpa between 6 and 6.99'; }
 
-else if (cgpadiet == 'Good') { combinedData = foodhabitscgpa3; title = 'Diet habits of students with cgpa between 7 and 7.9'; }
+else if (cgpadiet == 'Good') { combinedData = foodhabitscgpa3; title = 'Diet habits of students with cgpa between 7 and 7.99'; }
 
-else if (cgpadiet == 'Very Good') { combinedData = foodhabitscgpa4; title = 'Diethabits of students with cgpa between 8 and 8.9'; }
+else if (cgpadiet == 'Very Good') { combinedData = foodhabitscgpa4; title = 'Diethabits of students with cgpa between 8 and 8.99'; }
 
 else if (cgpadiet == 'Excellent') { combinedData = foodhabitscgpa5; title = 'Diet habits of students with cgpa above 9.0'; }
 
