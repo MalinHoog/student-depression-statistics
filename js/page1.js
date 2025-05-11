@@ -15,7 +15,7 @@ addMdToPage(`
   ### Comparing between the genders
 
   *Disclaimer:*
-  To make things more clear I will divide the student's answers into 3 groups, regarding their study satisfaction:
+  To make things more clear I will divide the student's answers into 3 groups, regarding their study satisfaction. In the original dataset, responses were given on a scale from 1 to 5, where 1 indicated a low rating and 5 a high one. However, some entries had a value of 0. After reviewing the data, I concluded that these responses were not relevant, as they appeared to come from students who likely did not take the survey seriously or did not complete it properly.
   * **Low**: 1 - 2
   * **Medium**: 3
   * **High**: 4 - 5
@@ -117,7 +117,7 @@ drawGoogleChart({
 addMdToPage(`<br>`);
 
 addMdToPage(`
-  Percentagewise there is not much differenting the genders in their study satisfaction. Both groups show low and medium satisfaction when it comes to their studies. And just about a fifth of all students report that they have high study satisfaction. 
+  Percentagewise there is not much differenting the genders in their study satisfaction. Both groups show low and medium satisfaction when it comes to their studies. And just about two fifths of all students report that they have high study satisfaction. 
   `);
 
 addMdToPage(`<br>`);
@@ -138,9 +138,9 @@ let studySatisfaction = await dbQuery(
   "GROUP BY profession, gender, Satisfaction_Level " +
   "ORDER BY profession, gender, " +
   "CASE " +
-  "WHEN study_satisfaction IN (4, 5) THEN 1 " +
+  "WHEN study_satisfaction IN (4, 5) THEN 3 " +
   "WHEN study_satisfaction = 3 THEN 2 " +
-  "WHEN study_satisfaction IN (1, 2) THEN 3 " +
+  "WHEN study_satisfaction IN (1, 2) THEN 1 " +
   "END"
 );
 
@@ -150,7 +150,7 @@ addMdToPage(`
   <br>`);
 
 addMdToPage(`
-  When we instead look into "the correlation between Study Satisfaction and Depression" diagram we can determine that the more unsatisfied the student's are with their study perfomance, more students report feeling depressed. Which might not be suprising, but even the students with high study satisfaction show that they experience depression. 
+  When we instead look into *"The correlation between Study Satisfaction and Depression"* diagram down below we can determine that the more unsatisfied the student's are with their study perfomance, more students report feeling depressed. Which might not be suprising, but even the students with high study satisfaction show that they experience depression, just not as many. 
   `);
 
 addMdToPage(`
@@ -177,18 +177,20 @@ let studySatFac = await dbQuery(`
 
 drawGoogleChart({
   type: 'ColumnChart',
-  data: makeChartFriendly(studySatFac, 'Study Satisfaction', 'Average Depression'),
+  data: makeChartFriendly(studySatFac, 'Study Satisfaction', 'Average Depression*'),
   options: {
     title: 'The correlation between Study Satisfaction and Depression',
     height: 500,
     vAxis: {
       title: 'Depression (0–1)',
-      viewWindow: { min: 0 }
+      viewWindow: { min: 0, max: 1 }
     },
     hAxis: { title: 'Study Satisfaction' },
     colors: ['#3366cc']
   }
 });
+
+addMdToPage(`**Average Depression represents the proportion of students who answered "Yes" (coded as 1) to experiencing feelings of depression. This is calculated as the average of all binary responses (1 = Yes, 0 = No) within each financial stress group. A higher average indicates a larger share of students reporting depressive feelings in that group.*`);
 
 addMdToPage(`<br>`);
 
@@ -260,7 +262,7 @@ let finansStressDepression = await dbQuery(`
 
 drawGoogleChart({
   type: 'ColumnChart',
-  data: makeChartFriendly(finansStressDepression, 'Finance', 'Avrerage Depression'),
+  data: makeChartFriendly(finansStressDepression, 'Finance', 'Average Depression*'),
   options: {
     title: 'The correlation between financial stress and depression',
     height: 500
@@ -271,7 +273,7 @@ drawGoogleChart({
   hAxis: { title: 'Finance levels' },
   colors: ['#3366cc']
 });
-
+addMdToPage(`**Average Depression represents the proportion of students who answered "Yes" (coded as 1) to experiencing feelings of depression. This is calculated as the average of all binary responses (1 = Yes, 0 = No) within each financial stress group. A higher average indicates a larger share of students reporting depressive feelings in that group.*`);
 
 addMdToPage(`<br>`);
 
@@ -367,7 +369,7 @@ if (sucidical === 'Students with Sucidial Thoughts') {
 
 drawGoogleChart({
   type: 'ColumnChart',
-  data: makeChartFriendly(combinedSucidialData, 'Financial Stress', 'Avg Dep'),
+  data: makeChartFriendly(combinedSucidialData, 'Financial Stress', 'Average Depression*'),
   options: {
     title: 'The correlation between Financial Stress, Sucidical Thoughts and Depression',
     height: 500,
@@ -383,6 +385,7 @@ drawGoogleChart({
   }
 });
 tableFromData({ data: combinedSucidialData });
+addMdToPage(`**Average Depression represents the proportion of students who answered "Yes" (coded as 1) to experiencing feelings of depression. This is calculated as the average of all binary responses (1 = Yes, 0 = No) within each financial stress group. A higher average indicates a larger share of students reporting depressive feelings in that group.*`);
 
 addMdToPage(`<br>`);
 
@@ -393,10 +396,10 @@ addMdToPage(`
 
   The two hypothesis we have been looking at are these:
   * *Students with low Study Satisfaction are more likely to be depressed.* 
-  * *Students with Financial Stress are more likely to be depressed, and more likley to have Sucidial Thoughts.*
+  * *Students with Financial Stress are more likely to be depressed, and more likely to have Sucidial Thoughts.*
   
-  Regarding the first hypothesis, we can unfortunately observe that a general sense of depression exists among students. However, the data indicates a clear trend: higher levels of study satisfaction are associated with lower levels of depression. In fact, students who report being dissatisfied with their studies tend to experience significantly more depressive symptoms compared to those who are more content.
+  Regarding the **first hypothesis**, we can unfortunately observe that a general sense of depression exists among students. However, the data indicates a clear trend: higher levels of study satisfaction are associated with lower levels of depression. In fact, students who report being dissatisfied with their studies tend to experience significantly more depressive symptoms compared to those who are more content.
 
-  As for the second hypothesis, the findings also support its validity. It becomes evident — though both surprising and understandable—just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
+  As for the **second hypothesis**, the findings also support its validity. It becomes evident — though both surprising and understandable—just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
 
   `);

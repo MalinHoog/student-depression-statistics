@@ -10,7 +10,10 @@ addMdToPage(`
   One aspect of student life that often goes overlooked is diet.
   While it’s widely known that a healthy diet contributes to improved well-being and longevity, maintaining good eating habits can be particularly challenging for students. Between academic pressures, time constraints, and limited budgets, prioritizing nutritious meals isn't always easy. In times of stress, many — myself included — turn to fast food or delivery apps as a way to save time and stay focused on studies.
 
-  However, this raises an important question: How does a student’s diet influence their academic performance, particularly their average CGPA?
+  However, this raises an important question: How does a student’s diet influence their academic performance, particularly their average CGPA*? <br>
+  **CGPA = Cumulative Grade Point Average.* <br>
+
+  In the survey some students reported a 0 on their CGPA. Also in this case, after reviewing the data, I concluded that these responses were not relevant, as they appeared to come from students who likely did not take the survey seriously or did not complete it properly.
   
   Understanding the relationship between dietary habits and academic outcomes may provide valuable insights into how students can better support their mental and cognitive well-being.
   `);
@@ -45,7 +48,7 @@ END;
 tableFromData({ data: overview });
 
 addMdToPage(`
-  For starters, let's just have a look at the grades among the students. Many of them seem to be doing pretty well in their studies. But further more, let's see if their diet habits can affect their studies: 
+  For starters, let's just have a look at the grades among the students, without taking the diet into account. Many of them seem to be doing pretty well in their studies. But further more, let's see if their diet habits can affect their studies: 
   `);
 
 let cgpadiet = addDropdown(`Compare diet habits based on CGPA`, ['Below 6.0', 'Between 6 and 7', 'Between 7 and 8', 'Between 8 and 9', 'Above 9', 'All CGPA']);
