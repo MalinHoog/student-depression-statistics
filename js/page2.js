@@ -256,12 +256,3 @@ On the other hand, students with lower grades tend to be more committed to maint
 
 addMdToPage(`<br>`);
 
-addMdToPage(`______________`);
-
-addMdToPage(`
-  ## Conclusion
-
-  * *Students with good Dietary Habits are less likely to have a low CGPA.*
-
-  From the data that we've taken a look at we can conclude that this hypothesis is not true, quite the oppisite, which is suprising for me. But also makes sense as perhaps a lot of students that wants to keep a above average grade decided to spend less time on making sure they eat healthy and propably more time on their studies. 
-  `);

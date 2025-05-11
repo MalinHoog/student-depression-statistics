@@ -387,19 +387,6 @@ drawGoogleChart({
 tableFromData({ data: combinedSucidialData });
 addMdToPage(`**Average Depression represents the proportion of students who answered "Yes" (coded as 1) to experiencing feelings of depression. This is calculated as the average of all binary responses (1 = Yes, 0 = No) within each financial stress group. A higher average indicates a larger share of students reporting depressive feelings in that group.*`);
 
-addMdToPage(`<br>`);
 
-addMdToPage(`_______________`);
 
-addMdToPage(`
-  ## Conclusion
 
-  The two hypothesis we have been looking at are these:
-  * *Students with low Study Satisfaction are more likely to be depressed.* 
-  * *Students with Financial Stress are more likely to be depressed, and more likely to have Sucidial Thoughts.*
-  
-  Regarding the **first hypothesis**, we can unfortunately observe that a general sense of depression exists among students. However, the data indicates a clear trend: higher levels of study satisfaction are associated with lower levels of depression. In fact, students who report being dissatisfied with their studies tend to experience significantly more depressive symptoms compared to those who are more content.
-
-  As for the **second hypothesis**, the findings also support its validity. It becomes evident - though both surprising and understandable - just how profoundly financial dependence impacts students. The data underscores that financial stress is not a minor concern, but rather a major factor affecting students' overall mental health and academic well-being.
-
-  `);
