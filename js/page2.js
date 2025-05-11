@@ -18,6 +18,11 @@ addMdToPage(`
   Understanding the relationship between dietary habits and academic outcomes may provide valuable insights into how students can better support their mental and cognitive well-being.
   `);
 
+addMdToPage(`____________`);
+
+addMdToPage(`
+  For starters, let's just have a look at the grades among the students, without taking the diet into account. Many of them seem to be doing pretty well in their studies. 
+  `);
 
 addMdToPage(`<br>`);
 
@@ -48,10 +53,30 @@ END;
 tableFromData({ data: overview });
 
 addMdToPage(`
-  For starters, let's just have a look at the grades among the students, without taking the diet into account. Many of them seem to be doing pretty well in their studies. But further more, let's see if their diet habits can affect their studies: 
+  **Understanding CGPA Levels** <br>
+  While interpretations can vary, the following serves as a general guideline:
+
+  * **Excellent** – 9.0 and above:
+  Reflects top academic performance and access to elite opportunities.
+
+  * **Very Good** – 8.0 to 8.9:
+  Strong results, typically enough for competitive programs or positions.
+
+  * **Good** – 7.0 to 7.9:
+  Solid academic standing, suitable for most career and study paths.
+
+  * **Average** – 6.0 to 6.9:
+  Moderate performance; may require extra credentials to stand out.
+
+  * **Needs Improvement** – Below 6.0:
+  Indicates academic struggles; focus on improving grades or gaining experience.
   `);
 
-let cgpadiet = addDropdown(`Compare diet habits based on CGPA`, ['Below 6.0', 'Between 6 and 7', 'Between 7 and 8', 'Between 8 and 9', 'Above 9', 'All CGPA']);
+addMdToPage(`<br>`);
+
+addMdToPage(`But further more, let's see if their diet habits can affect their studies: `);
+
+let cgpadiet = addDropdown(`Compare diet habits based on CGPA`, ['Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA']);
 
 // sorterar bort others i diet
 let foodhabits = await dbQuery(`
@@ -157,15 +182,15 @@ ORDER BY profession, dietary_habits;
 
 
 let combinedData, title;
-if (cgpadiet == 'Below 6.0') { combinedData = foodhabitscgpa1; title = 'Diet habits of students with cgpa below 6'; }
+if (cgpadiet == 'Needs Improvement') { combinedData = foodhabitscgpa1; title = 'Diet habits of students with cgpa below 5.9'; }
 
-else if (cgpadiet == 'Between 6 and 7') { combinedData = foodhabitscgpa2; title = 'Diet habits of students with cgpa between 6 and 7'; }
+else if (cgpadiet == 'Average') { combinedData = foodhabitscgpa2; title = 'Diet habits of students with cgpa between 6 and 6.9'; }
 
-else if (cgpadiet == 'Between 7 and 8') { combinedData = foodhabitscgpa3; title = 'Diet habits of students with cgpa between 7 and 8'; }
+else if (cgpadiet == 'Good') { combinedData = foodhabitscgpa3; title = 'Diet habits of students with cgpa between 7 and 7.9'; }
 
-else if (cgpadiet == 'Between 8 and 9') { combinedData = foodhabitscgpa4; title = 'Diethabits of students with cgpa between 8 and 9'; }
+else if (cgpadiet == 'Very Good') { combinedData = foodhabitscgpa4; title = 'Diethabits of students with cgpa between 8 and 8.9'; }
 
-else if (cgpadiet == 'Above 9') { combinedData = foodhabitscgpa5; title = 'Diet habits of students with cgpa above 9'; }
+else if (cgpadiet == 'Excellent') { combinedData = foodhabitscgpa5; title = 'Diet habits of students with cgpa above 9.0'; }
 
 else { combinedData = foodhabits; title = 'All CGPA'; };
 

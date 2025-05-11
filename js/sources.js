@@ -15,4 +15,6 @@ addMdToPage(`
   * https://www.studyindia.com/student-life-in-india
   * https://studyinindia.gov.in/about-indian-higher-education-
 
+  **Learnyhive**
+  * https://www.learnyhive.com/what-is-a-good-cgpa/ 
   `);
