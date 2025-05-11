@@ -9,6 +9,8 @@ addMdToPage(`
 
   Therefore we are taking a look at how students sleeping habits can affect their grades. 
 
+  In the survey some students reported a 0 on their CGPA. Also in this case, after reviewing the data, I concluded that these responses were not relevant, as they appeared to come from students who likely did not take the survey seriously or did not complete it properly.
+
   ### Hypothesis
   * *Students with good Sleeping Habits are less likely to have a low CGPA.** <br>
   **CGPA = Cumulative Grade Point Average.* 
@@ -18,15 +20,18 @@ addMdToPage(`
 
 let cgpa = addDropdown('Check the sleeping habits based on students CGPA', ['Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA']);
 
+// all students 
 let sleepingHabits = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
   FROM results
   WHERE sleep_duration != 'Others'
+  AND cgpa BETWEEN 5 AND 10
   GROUP BY sleep_duration
   ORDER BY sleep_duration;
   `);
 
+// students that "needs improvment" in their studies
 let sleepingHabits1 = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -37,6 +42,7 @@ let sleepingHabits1 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
+// students with "Average" grades
 let sleepingHabits2 = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -47,6 +53,7 @@ let sleepingHabits2 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
+// students with "Good" grades
 let sleepingHabits3 = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -57,6 +64,7 @@ let sleepingHabits3 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
+// students with "Very Good" grades
 let sleepingHabits4 = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -67,6 +75,7 @@ let sleepingHabits4 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
+// // students with "Excellent" grades
 let sleepingHabits5 = await dbQuery(`
   SELECT sleep_duration, COUNT(*) AS Amount_Of_Students, 
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
@@ -77,7 +86,7 @@ let sleepingHabits5 = await dbQuery(`
   ORDER BY sleep_duration;
   `);
 
-// 'Needs Improvement', 'Average', 'Good', 'Very Good', 'Excellent', 'All CGPA'
+
 
 let combinedData, title;
 if (cgpa == 'Needs Improvement') { combinedData = sleepingHabits1; title = 'Sleeping habits of students with CGPA between 5.0 and 5.99'; }
@@ -86,9 +95,9 @@ else if (cgpa == 'Average') { combinedData = sleepingHabits2; title = 'Sleeping 
 
 else if (cgpa == 'Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 7.0 and 7.99'; }
 
-else if (cgpa == 'Very Good') { combinedData = sleepingHabits3; title = 'Sleeping habits of students with CGPA between 8.0 and 8.99'; }
+else if (cgpa == 'Very Good') { combinedData = sleepingHabits4; title = 'Sleeping habits of students with CGPA between 8.0 and 8.99'; }
 
-else if (cgpa == 'Excellent') { combinedData = sleepingHabits4; title = 'Sleeping habits of students with cgpa above 9.0'; }
+else if (cgpa == 'Excellent') { combinedData = sleepingHabits5; title = 'Sleeping habits of students with cgpa above 9.0'; }
 
 else { combinedData = sleepingHabits; title = 'All CGPA'; };
 

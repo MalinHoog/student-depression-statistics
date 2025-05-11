@@ -20,7 +20,7 @@ addMdToPage(`
   * **Medium**: 3
   * **High**: 4 - 5
 
-  In this first piechart we can compare the study satisfaction between the genders mentioned in the data: *Female* and *Male*, both also look at the combined data between the two. 
+  In this first piechart we can compare the study satisfaction between the genders mentioned in the data: *Female*, *Male* and look at the combined data between the two. 
   `);
 
 let gender = addDropdown('Choose what gender to show', ['Male', 'Female', 'Both']);
