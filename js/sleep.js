@@ -125,6 +125,29 @@ tableFromData({ data: combinedData });
 addMdToPage(`<br>`);
 
 addMdToPage(`
+  **Understanding CGPA Levels** <br>
+  While interpretations can vary, the following serves as a general guideline that I've used in this project:
+
+  * **Excellent** – 9.0 and above:
+  Reflects top academic performance and access to elite opportunities.
+
+  * **Very Good** – 8.0 to 8.99:
+  Strong results, typically enough for competitive programs or positions.
+
+  * **Good** – 7.0 to 7.99:
+  Solid academic standing, suitable for most career and study paths.
+
+  * **Average** – 6.0 to 6.99:
+  Moderate performance; may require extra credentials to stand out.
+
+  * **Needs Improvement** – Below 6.0:
+  Indicates academic struggles; focus on improving grades or gaining experience.
+  `);
+
+addMdToPage(`<br>`);
+
+
+addMdToPage(`
   The data suggests that many students are not getting sufficient sleep on a regular basis. This may not always be a matter of poor time management - often, elevated stress levels or symptoms of depression can interfere with the ability to fall asleep or maintain restful sleep. Unfortunately, the majority of students appear to be sleeping fewer than six hours per night, which is a concerning trend considering the vital role sleep plays in cognitive function and emotional resilience.
 
   Interestingly, even students with a CGPA above 9.0 seem to get less sleep than their peers with lower academic scores. This could indicate that high-performing students sacrifice rest in order to maintain their academic standing. Meanwhile, students with mid-range grades - those scoring between 6 and 7 - appear to prioritize sleep slightly more, potentially recognizing its importance for sustaining performance over time.

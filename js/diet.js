@@ -52,6 +52,8 @@ END;
 
 tableFromData({ data: overview });
 
+addMdToPage(`<br>`);
+
 addMdToPage(`
   **Understanding CGPA Levels** <br>
   While interpretations can vary, the following serves as a general guideline that I've used in this project:
@@ -59,13 +61,13 @@ addMdToPage(`
   * **Excellent** – 9.0 and above:
   Reflects top academic performance and access to elite opportunities.
 
-  * **Very Good** – 8.0 to 8.9:
+  * **Very Good** – 8.0 to 8.99:
   Strong results, typically enough for competitive programs or positions.
 
-  * **Good** – 7.0 to 7.9:
+  * **Good** – 7.0 to 7.99:
   Solid academic standing, suitable for most career and study paths.
 
-  * **Average** – 6.0 to 6.9:
+  * **Average** – 6.0 to 6.99:
   Moderate performance; may require extra credentials to stand out.
 
   * **Needs Improvement** – Below 6.0:
