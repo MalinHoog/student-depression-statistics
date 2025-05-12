@@ -38,7 +38,7 @@ SELECT profession AS Profession,
   COUNT(*) AS Amount_Of_Students,
   ROUND(100.0 * COUNT(*) / SUM(COUNT(*)) OVER (PARTITION BY profession), 1) AS Percentage
 FROM results
-WHERE dietary_habits = 'Healthy' AND cgpa !=0
+WHERE cgpa !=0
 GROUP BY profession, CGPA_range
 ORDER BY 
 CASE 

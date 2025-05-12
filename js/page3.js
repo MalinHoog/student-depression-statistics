@@ -1,5 +1,5 @@
 addMdToPage(`
-  ## Sleeping habits and CGPA
+  ## Sleeping Habits and CGPA
 
   __________________
 

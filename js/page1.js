@@ -1,5 +1,5 @@
 addMdToPage(`
-  ## Student's depression and study satisfaction
+  ## Depression and Study Satisfaction
  
   _______________
 
@@ -12,9 +12,7 @@ addMdToPage(`
 `);
 
 addMdToPage(`
-  ### Comparing between the genders
-
-  *Disclaimer:*
+   *Disclaimer:*
   To make things more clear I will divide the student's answers into 3 groups, regarding their study satisfaction. In the original dataset, responses were given on a scale from 1 to 5, where 1 indicated a low rating and 5 a high one. However, some entries had a value of 0. After reviewing the data, I concluded that these responses were not relevant, as they appeared to come from students who likely did not take the survey seriously or did not complete it properly.
   * **Low**: 1 - 2
   * **Medium**: 3

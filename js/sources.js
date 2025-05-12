@@ -20,4 +20,7 @@ addMdToPage(`
   
   **Scholaro**
   * https://www.scholaro.com/db/News/the-cost-of-higher-education-in-india-62
+
+  **SageJournals**
+  * https://journals.sagepub.com/doi/10.1177/20556365251321202?icid=int.sj-full-text.similar-articles.9
   `);
