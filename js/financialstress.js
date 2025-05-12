@@ -11,7 +11,7 @@ addMdToPage(`
 
 addMdToPage(`
   Another factor that can weigh heavily on a student's mind is financial stress.
-  Being a student often means living on a tight budget, which can significantly impact mental well-being. A majority of students report that financial concerns are a constant source of stress - especially in a country like India, where education comes at a cost. The pressure of managing expenses while trying to focus on studies can take a serious toll on mental health.
+  Being a student often means living on a tight budget, which can significantly impact mental well-being. A majority of students report that financial concerns are a constant source of stress - especially in a country like India, where higher education often comes at a cost. The pressure of managing expenses while trying to focus on studies can take a serious toll on mental health.
   `);
 
 addMdToPage(`<br>`);
@@ -41,6 +41,14 @@ let finansStress = await dbQuery(`
 `);
 
 tableFromData({ data: finansStress });
+
+addMdToPage(`<br>`);
+
+addMdToPage(`
+  Let's begin by looking at the overall experience of financial stress among students. As shown in the data, financial stress is a common issue, with a clear upward trend—most students report experiencing it to some degree.
+
+  In the following diagram down below, we explore the connection between financial stress and average levels of depression. Unsurprisingly, the data shows a strong correlation: the more students worry about their finances, the more likely they are to report symptoms of depression. This highlights the significant impact that economic pressure can have on students’ mental health.
+  `);
 
 addMdToPage(`<br>`);
 
@@ -85,7 +93,7 @@ addMdToPage(`**Average Depression represents the proportion of students who answ
 addMdToPage(`<br>`);
 
 addMdToPage(`
-  It may not come as a surprise that financial stress and depression can influence suicidal thoughts among students. However, when comparing levels of financial stress and depression with the prevalence of suicidal ideation, the connection becomes even more evident. This highlights just how crucial it is to ensure students have the financial support they need in order to maintain both their academic focus and mental well-being.
+  It may not come as a surprise that financial stress and depression can influence suicidal thoughts among students, as we can see in the diagram below. However, when comparing levels of financial stress and depression with the prevalence of suicidal ideation, the connection becomes even more evident. This highlights just how crucial it is to ensure students have the financial support they need in order to maintain both their academic focus and mental well-being.
   `);
 
 addMdToPage(`<br>`);

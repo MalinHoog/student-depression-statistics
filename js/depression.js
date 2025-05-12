@@ -4,7 +4,7 @@ addMdToPage(`
   _______________
 
   ### Hypothesis:
-  * *Students with low Study Satisfaction are more likely to be depressed*
+  * *Students with low Study Satisfaction are more likely to be depressed.*
   
   On this page we will look into the data that concerns the student's study satsfaction and the correlation with reported depression. 
 
