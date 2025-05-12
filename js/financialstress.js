@@ -45,7 +45,7 @@ tableFromData({ data: finansStress });
 addMdToPage(`<br>`);
 
 addMdToPage(`
-  Let's begin by looking at the overall experience of financial stress among students. As shown in the data, financial stress is a common issue, with a clear upward trend—most students report experiencing it to some degree.
+  Let's begin by looking at the overall experience of financial stress among students. As shown in the data above, financial stress is a common issue, with a clear upward trend - most students report experiencing it to some degree.
 
   In the following diagram down below, we explore the connection between financial stress and average levels of depression. Unsurprisingly, the data shows a strong correlation: the more students worry about their finances, the more likely they are to report symptoms of depression. This highlights the significant impact that economic pressure can have on students’ mental health.
   `);

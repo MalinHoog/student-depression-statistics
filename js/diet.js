@@ -14,14 +14,12 @@ addMdToPage(`
   **CGPA = Cumulative Grade Point Average.* <br>
 
   In the survey some students reported a 0 on their CGPA. Also in this case, after reviewing the data, I concluded that these responses were not relevant, as they appeared to come from students who likely did not take the survey seriously or did not complete it properly.
-  
-  Understanding the relationship between dietary habits and academic outcomes may provide valuable insights into how students can better support their mental and cognitive well-being.
   `);
 
 addMdToPage(`____________`);
 
 addMdToPage(`
-  For starters, let's just have a look at the grades among the students, without taking the diet into account. Many of them seem to be doing pretty well in their studies. 
+  Understanding the relationship between dietary habits and academic outcomes may provide valuable insights into how students can better support their mental and cognitive well-being. For starters, let's just have a look at the grades among the students, without taking the diet into account. Many of them seem to be doing pretty well in their studies. 
   `);
 
 addMdToPage(`<br>`);
@@ -236,7 +234,7 @@ drawGoogleChart({
       title: 'Percentage (%)',
       viewWindow: {
         min: 0,
-        max: 50
+        max: 45
       }
     },
     hAxis: { title: 'Diet Habits' },
@@ -251,9 +249,9 @@ addMdToPage(`<br>`);
 addMdToPage(`
 In the data above reveals a somewhat unexpected trend regarding students’ dietary habits and academic performance. Contrary to what one might assume, there appears to be little variation in diet quality based on students' CGPA. While the majority of students report following an unhealthy diet, their academic performance remains relatively close to the average - suggesting that poor dietary choices do not immediately translate to lower grades.
 
-Interestingly, even among high-achieving students with a CGPA above 9.0, unhealthy eating habits are still prevalent. These students often prioritize academic success over personal health, choosing to sacrifice a balanced diet in order to devote more time and energy to their studies.
+Interestingly, even among high-achieving students with a CGPA above 9.0, unhealthy eating habits are still prevalent. These students might prioritize academic success over personal health, choosing to sacrifice a balanced diet in order to devote more time and energy to their studies.
 
-On the other hand, students with lower grades tend to be more committed to maintaining a healthy lifestyle. While their academic results may not be as strong, their dedication to healthier eating suggests a different set of priorities - perhaps aiming for long-term well-being over short-term academic pressure.
+On the other hand, students with lower grades tend to also keep to the moderate to unhealthy diet style, scpecifically those with Average grades, where the unhealthy lifestyle peaks up more than the normal norm. Those with grades that needs improvment try keeping a more healthy choice of food, while their academic results may not be as strong, their dedication to healthier eating suggests a different set of priorities - perhaps aiming for long-term well-being over short-term academic pressure.
   `);
 
 addMdToPage(`<br>`);
